@@ -1,0 +1,5 @@
+/node_modules
+/public
+*.sublime-*
+.DS_Store
+.c9

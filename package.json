@@ -1,0 +1,35 @@
+{
+  "name": "ThreeCannonWebpack",
+  "version": "1.0.0",
+  "description": "Here be dragons.",
+  "main": "server.js",
+  "dependencies": {
+    "cannon": "^0.6.2",
+    "express": "^4.14.0",
+    "three": "^0.84.0",
+    "webpack": "^1.14.0",
+    "webpack-dev-middleware": "^1.9.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-env": "^1.1.8",
+    "copy-webpack-plugin": "^4.0.1",
+    "html-webpack-plugin": "^2.26.0",
+    "raw-loader": "^0.5.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dr-Jerm/ggj2017.git"
+  },
+  "author": "Jeremy Bernstein <utilityjerm@gmail.com> (http://jerm.io)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dr-Jerm/ggj2017/issues"
+  },
+  "homepage": "https://github.com/Dr-Jerm/ggj2017#readme"
+}
