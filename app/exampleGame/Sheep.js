@@ -22,11 +22,11 @@ class Sheep extends Actor {
     var self = this;
     
     var loader = new THREE.OBJLoader();
-    loader.setPath('./models/obj/sheep');
+    loader.setPath('./models/obj/');
 
     loader.load('sheep.obj', function(object) {
       var loader = new THREE.TextureLoader();
-      loader.setPath('./models/obj/sheep/');
+      loader.setPath('./textures/');
       
       var sheepMesh = object.children[0];
       sheepMesh.material.map = loader.load('sheepDiffuse.png');
@@ -114,6 +114,11 @@ class Sheep extends Actor {
       var _rayCastOrigin = _currentBodyPos.clone().add(new THREE.Vector3(0,0.01,0));
       this.raycaster.set(_rayCastOrigin, new THREE.Vector3(0,-0.02,0));    
       
+      var _currentHeight = this.body.position.clone().y;
+      if( _currentHeight <= -2 )
+      {
+        this.destroy();
+      }   
 
       // var _ground = window.game.scene.ripplePlane.object3D;    
       // var _intersects = this.raycaster.intersectObject(_ground, true)
@@ -277,7 +282,7 @@ class Sheep extends Actor {
       this.speed += this.accel;
     }
 
-    this.speed = this.clamp(this.speed, 0, this.maxSpeed);
+      this.speed = MathHelpers.clamp(this.speed, 0, this.maxSpeed);
     _velocity = _fwdVect.clone().multiplyScalar(this.speed);
     _velocity.multiplyScalar(delta);
 

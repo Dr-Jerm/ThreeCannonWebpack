@@ -35,7 +35,7 @@ class Scene extends THREE.Scene {
   tick (delta) {
     Globals.world.step(delta);
     this.controls.update();
-    tickActors(this.tickingActors, delta);
+    tickActors(this, this.tickingActors, delta);
   }
   
   removeTickingActor (actor) {
@@ -46,13 +46,13 @@ class Scene extends THREE.Scene {
   }
 }
 
-let tickActors = function (actors, delta) {
+let tickActors = function (scene, actors, delta) {
   for (let i = 0; i < actors.length; i++) {
     let actor = actors[i];
     if (actor.ticks && actor.tick) {
-      if (!this.bPause) { // not paused
+      if (!scene.bPause) { // not paused
         actor.tick(delta);
-      } else if (this.bPause&& !actor.effectedByPause) { // is paused but actor still ticks
+      } else if (scene.bPause&& !actor.effectedByPause) { // is paused but actor still ticks
         actors[i].tick(delta);
       }
     }

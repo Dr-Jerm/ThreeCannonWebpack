@@ -21,13 +21,14 @@ class Actor {
   }
   
   tick(delta) {
-    this.clearLines();
     this.syncCollisionBodyAndRenderable();
   }
   
   destroy() {
-    
-    delete this;
+    Globals.scene.removeTickingActor(this);
+    recursiveDispose(Globals.scene, this.object3D);
+    // Globals.scene.remove(this.object3D);
+    Globals.world.remove(this.body);
   }
   
   beginPlay() {
@@ -65,7 +66,7 @@ class Actor {
     
     if (this.physicsEnabled) {
     this.object3D.position.copy(this.body.position);
-    this.object3D.position.y = this.object3D.position.y - this.hackyYOffset;
+    this.object3D.position.y = this.object3D.position.y;
     this.object3D.quaternion.copy(this.body.quaternion);
     } else if (!this.physicsEnabled) {
       this.body.position.copy(this.object3D.position);
@@ -73,5 +74,20 @@ class Actor {
     }
   }
 }
+
+var recursiveDispose = function (parent, object3D) {
+  if (!object3D) return;
+  
+  if (object3D.material) object3D.material.dispose();
+  if (object3D.geometry) object3D.geometry.dispose();
+  
+  if (object3D.children && object3D.children.length > 0) {
+    for (let i = 0; i < object3D.children.length; i++) {
+      recursiveDispose(object3D, object3D.children[i]);
+    }
+  }
+  
+  parent.remove(object3D);
+};
 
 module.exports = Actor;

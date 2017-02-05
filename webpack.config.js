@@ -16,7 +16,11 @@ var config = {
   plugins: [
     new HtmlWebpackPlugin(htmlConfig),
     new CopyWebpackPlugin([
-      { from: ['./app/core/models', './app/exampleGame/models'], to: './models' },
+      { from: 'app/**/*.obj', to: './models/obj', flatten: true },
+      { from: 'app/**/*.fbx', to: './models/fbx', flatten: true },
+      { from: 'app/**/*.png', to: './textures'  , flatten: true },
+      { from: 'app/**/*.jpg', to: './textures'  , flatten: true },
+      { from: 'app/**/*.ogg', to: './sound'     , flatten: true },
     ]),
       new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'] // Specify the common bundle's name.

@@ -36,34 +36,40 @@ class ExampleScene extends Scene {
       let controller2 = new Controller(1, this.controls);
       this.add(controller2);
       this.tickingActors.push(controller2);
+      this.offsetY = 1.7;
     } else {
-      this.camera.position.y = 1;
-      this.camera.rotation.x = 10;
+      this.camera.position.y = 1.5;
+      this.camera.position.z = 0.5;
       this.controls = new THREE.OrbitControls( this.camera, Globals.renderer.domElement );
       this.controls.enableZoom = true;
       this.controls.enableDamping = true;
       this.controls.dampingFactor = 0.25;
+      this.offsetY = 0;
+      this.mouse = { // this should be refactored into an input class
+        x: 0,
+        y: 0
+      };
     }
     
     new Skysphere();
     
     this.groundPlane = new GroundPlane(this, this.world);
-    this.groundPlane.object3D.position.set(0,1.7 - this.offsety,0);
-    this.groundPlane.body.position.set(0,1.7 - this.offsety,0);
+    this.groundPlane.object3D.position.set(0,this.offsetY, 0);
+    this.groundPlane.body.position.set(0,this.offsetY, 0);
     
-    this.numSheep = 50;
+    this.numSheep = 10;
     for(var i=0; i<this.numSheep; i++)
     {
         var sheep = new Sheep();
-        sheep.object3D.position.y = 2.23- this.offsety;
+        sheep.object3D.position.y = 0.53 + this.offsetY;
     }    
     
-    document.body.onkeyup = function(e){
+    document.body.onkeyup = function(e){ // this should be refactored into an input class
       if(e.keyCode == 32){
         console.log("I pressed spacebar");
       }
     };
-    if (WEBVR.isAvailable() === false) {
+    if (WEBVR.isAvailable() === false) { // this should be refactored into an input class
       document.body.onmousemove = (e)=>{
         // calculate mouse position in normalized device coordinates
         // (-1 to +1) for both components
@@ -71,19 +77,10 @@ class ExampleScene extends Scene {
         this.mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
       };
   
-      document.body.onmousedown = (e)=>{
+      document.body.onmousedown = (e)=>{ // this should be refactored into an input class
         if(e.button == 0)
         {
-          // update the picking ray with the camera and mouse position
-          this.raycaster.setFromCamera( this.mouse, this.camera );
-  
-          // calculate objects intersecting the picking ray
-          var _intersects = this.raycaster.intersectObject( this.groundPlane.object3D, true );
-          if(_intersects.length > 0)
-          {
-            var _impactPoint = _intersects[ 0 ].point;
-            
-          }
+          console.log("Clicked Left Mouse Button.");
         }
       };
     }

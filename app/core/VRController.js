@@ -25,11 +25,11 @@ class VRController extends THREE.ViveController  {
     
     if (this.showViveControllers) {
       var loader = new THREE.OBJLoader();
-      loader.setPath('./models/obj/vive-controller/');
+      loader.setPath('./models/obj/');
       
       loader.load('vr_controller_vive_1_5.obj', function(object) {
         var loader = new THREE.TextureLoader();
-        loader.setPath('./models/obj/vive-controller/');
+        loader.setPath('./textures/');
         
         var controller = object.children[0];
         controller.material.map = loader.load(

@@ -7,10 +7,10 @@ class Skysphere extends Actor {
     
     var self = this;
     var loader = new THREE.OBJLoader();
-    loader.setPath('./models/obj/skybox/');
+    loader.setPath('./models/obj/');
     loader.load('skysphere.obj', function(object) {
       var loader = new THREE.TextureLoader();
-      loader.setPath('./models/obj/skysphere/');
+      loader.setPath('./textures/');
       
       var skysphere = object.children[0];
       skysphere.material.map = loader.load(

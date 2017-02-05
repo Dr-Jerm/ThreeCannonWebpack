@@ -12,7 +12,7 @@ class SoundManager extends Actor {
     this.soundDictionary = {};
     
     for (let i = 0; i < soundFiles.length; i++) {
-      let path = '../sound/'+soundFiles[i];
+      let path = './sound/'+soundFiles[i];
       
       var audioLoader = new THREE.AudioLoader();
       var sound1 = new THREE.PositionalAudio( listener );
